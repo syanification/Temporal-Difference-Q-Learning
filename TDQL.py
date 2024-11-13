@@ -1,4 +1,3 @@
-import numpy as np
 import os
 import sys
 
@@ -107,8 +106,3 @@ class td_qlearning:
           return -10
         else:
           return -1
-    
-td = td_qlearning(r"C:\Users\Riley\Desktop\University\Final Year\Fall\COMP3106\A3\Examples\Example2\Trials")
-print(td.policy("EC"))
-
-
