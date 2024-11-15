@@ -74,7 +74,7 @@ class td_qlearning:
           qDict[(state, action)] += self.alpha * ( reward + self.gamma * float(maxNextQ) - oldQ)
 
           #Check if still converging
-          if abs(qDict[(state,action)] - oldQ) > 0.0005:
+          if abs(qDict[(state,action)] - oldQ) > 0.005:
             converged = False
 
     self.Q = qDict
@@ -106,3 +106,6 @@ class td_qlearning:
           return -10
         else:
           return -1
+        
+d = td_qlearning(r"C:\Users\Riley\Desktop\University\Final Year\Fall\COMP3106\A3\Examples\Example2\Trials")
+print(d.qvalue('DC','E'))
