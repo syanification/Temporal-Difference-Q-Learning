@@ -1,3 +1,4 @@
+import numpy as np
 import os
 import sys
 
@@ -50,9 +51,10 @@ class td_qlearning:
     #Update Q-Values until convergence
     converged = False
     iterations = 0
-    while not converged and iterations < 100000:
+    while not converged and iterations < 10000:
       iterations += 1
       converged = True
+      oldQDict = qDict.copy()
 
       for trial in trialData:
         #print(trial)
@@ -73,9 +75,11 @@ class td_qlearning:
 
           qDict[(state, action)] += self.alpha * ( reward + self.gamma * float(maxNextQ) - oldQ)
 
-          #Check if still converging
-          if abs(qDict[(state,action)] - oldQ) > 0.005:
-            converged = False
+      #Check if still converging
+      for pair in oldQDict:
+        if abs(qDict[pair] - oldQDict[pair]) > 0.0005:
+          converged = False
+          break
 
     self.Q = qDict
 
@@ -106,6 +110,3 @@ class td_qlearning:
           return -10
         else:
           return -1
-        
-d = td_qlearning(r"C:\Users\Riley\Desktop\University\Final Year\Fall\COMP3106\A3\Examples\Example2\Trials")
-print(d.qvalue('DC','E'))
